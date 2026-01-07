@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import
 
+// test.use({ storageState: undefined });
 test.describe('SC1:Login on system', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('https://www-dev.proever.app/signin');
@@ -8,7 +8,6 @@ test.describe('SC1:Login on system', () => {
   });
 
   test('TCs1: Login success', async ({ page }) => {
-    new createProgramPage = new Crêta
     const emailInput = page.locator('input[type="email"]');
     await emailInput.fill('duong.thi.van-b+1213@sun-asterisk.com');
     const nextbutton = page.locator('input[type="submit"]');
@@ -22,5 +21,6 @@ test.describe('SC1:Login on system', () => {
     const rejectBtn = page.locator('#idBtn_Back');
     await rejectBtn.click();
     await expect(page).toHaveURL(/\/home/);
+    await page.context().storageState({ path: 'auth.json' });
   });
 });
