@@ -1,19 +1,15 @@
-import { LoginPage } from '../page/LoginPage';
-import { test, expect } from '@playwright/test';
-import { CREATE_PROGRAM_PAGE_URL } from '../constants';
-import { CreateProgram } from '../page/CreateProgramPage';
+import { test, expect } from '../fixtures';
+import { CREATE_PROGRAMS_PAGE_URL } from '../constants';
+import { CreateProgramPage } from '../page/CreateProgramPage';
 
 test.beforeEach(async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.login(page);
-  await page.goto(CREATE_PROGRAM_PAGE_URL);
+  await page.goto(CREATE_PROGRAMS_PAGE_URL);
 });
 
-test('TCs1: Create Program success', async ({ page }) => {
-  const createProgram = new CreateProgram(page);
+test('TCs1: Create Program success', async ({ page, createProgram }) => {
   const timestamp = new Date().toISOString();
   await createProgram.programName.fill(`Test Create${timestamp}`);
-  await createProgram.keyProject.fill(`Key${timestamp}`);
+  await createProgram.keyProgram.fill(`Key${timestamp}`);
   await createProgram.selectManagerBtn.click();
   await createProgram.searchInput.fill('Team A');
   await page
